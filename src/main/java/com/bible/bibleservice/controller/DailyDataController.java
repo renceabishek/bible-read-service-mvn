@@ -27,7 +27,7 @@ public class DailyDataController {
 		return value;
 	}
 	
-	@Autowired
+	/*@Autowired
 	  private DailyDataService dailyDataService;
 
 	  @GetMapping(value ="/")
@@ -58,5 +58,5 @@ public class DailyDataController {
 	  @GetMapping(value="/totalCounts")
 	  public List<TotalCount> getTotalCountData() {
 	    return dailyDataService.getTotalCountData();
-	  }
+	  }*/
 }
