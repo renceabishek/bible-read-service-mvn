@@ -15,14 +15,14 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class FirebaseConfig {
 
-  @Value("${firebase.path}")
+ /* @Value("${firebase.path}")
   private String path;
 
-  /*@Value(value = "classpath:google-services.json")
-  private Resource gservicesConfig;*/
+  @Value(value = "classpath:google-services.json")
+  private Resource gservicesConfig;
 
   @Value("${firebase.database-url}")
-  private String databaseUrl;
+  private String databaseUrl;*/
 
   /*@Bean
   public FirebaseApp provideFirebaseOptions() throws IOException {
