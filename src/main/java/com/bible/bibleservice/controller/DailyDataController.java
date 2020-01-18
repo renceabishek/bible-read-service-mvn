@@ -1,4 +1,4 @@
-package controller;
+package com.bible.bibleservice.controller;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +19,7 @@ import com.bible.bibleservice.service.DailyDataService;
 
 @RequestMapping("/bible")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 public class DailyDataController {
 
 	@GetMapping(value="/check/{value}")
