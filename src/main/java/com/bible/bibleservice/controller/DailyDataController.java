@@ -13,13 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bible.bibleservice.model.DailyData;
-import com.bible.bibleservice.model.TotalCount;
-import com.bible.bibleservice.service.DailyDataService;
-
 @RequestMapping("/bible")
 @RestController
-//@CrossOrigin
+@CrossOrigin
 public class DailyDataController {
 
 	@GetMapping(value="/check/{value}")
