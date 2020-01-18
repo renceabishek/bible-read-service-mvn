@@ -15,10 +15,10 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class FirebaseConfig {
 
- /* @Value("${firebase.path}")
+  @Value("${firebase.path}")
   private String path;
 
-  @Value(value = "classpath:google-services.json")
+  /* @Value(value = "classpath:google-services.json")
   private Resource gservicesConfig;
 
   @Value("${firebase.database-url}")
