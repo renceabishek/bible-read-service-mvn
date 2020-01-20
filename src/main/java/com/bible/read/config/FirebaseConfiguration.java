@@ -24,7 +24,7 @@ public class FirebaseConfiguration {
 	  @Value("${firebase.database-url}")
 	  private String databaseUrl;
 
-	  /*@Bean
+	  @Bean
 	  public FirebaseApp provideFirebaseOptions() throws IOException {
 	    FirebaseOptions options = new FirebaseOptions.Builder()
 	        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
@@ -43,6 +43,6 @@ public class FirebaseConfiguration {
 	    return FirebaseDatabase
 	        .getInstance(firebaseApp)
 	        .getReference();
-	  }*/
+	  }
 
 }
