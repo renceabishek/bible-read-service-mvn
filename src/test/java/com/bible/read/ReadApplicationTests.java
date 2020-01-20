@@ -1,10 +1,10 @@
-package com.bible.bibleservice;
+package com.bible.read;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BibleserviceApplicationTests {
+class ReadApplicationTests {
 
 	@Test
 	void contextLoads() {
