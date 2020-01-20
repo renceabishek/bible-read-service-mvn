@@ -15,8 +15,8 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class FirebaseConfig {
 
-  @Value("${pi.value}")
-  private String path;
+  /*@Value("${pi.value}")
+  private String path;*/
 
   /* @Value(value = "classpath:google-services.json")
   private Resource gservicesConfig;
