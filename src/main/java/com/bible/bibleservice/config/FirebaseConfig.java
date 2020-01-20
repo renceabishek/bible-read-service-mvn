@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
-@Configuration
+//@Configuration
 public class FirebaseConfig {
 
   /*@Value("${pi.value}")
