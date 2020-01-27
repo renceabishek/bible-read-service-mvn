@@ -22,7 +22,7 @@ import com.bible.read.service.DailyDataService;
 public class ReadController {
 	
 	@Autowired
-	  private DailyDataService dailyDataService;
+	private DailyDataService dailyDataService;
 
 	@GetMapping(value="/value/{value}")
 	public String getValue(@PathVariable String value) {
