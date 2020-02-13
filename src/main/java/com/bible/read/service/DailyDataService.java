@@ -13,7 +13,7 @@ public interface DailyDataService {
 
   void deleteDailyDataById(String uniqueId);
 
-  void createDailyData(DailyData dailyData);
+  String createDailyData(DailyData dailyData);
 
   List<TotalCount> getTotalCountData();
 

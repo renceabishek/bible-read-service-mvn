@@ -45,8 +45,8 @@ public class ReadController {
 	  }
 
 	  @PostMapping(value = "/all", consumes = "application/json")
-	  public void createDailyData(@RequestBody DailyData dailyData) {
-	     dailyDataService.createDailyData(dailyData);
+	  public String createDailyData(@RequestBody DailyData dailyData) {
+	    return dailyDataService.createDailyData(dailyData);
 	  }
 
 	  @GetMapping(value="/totalCounts")

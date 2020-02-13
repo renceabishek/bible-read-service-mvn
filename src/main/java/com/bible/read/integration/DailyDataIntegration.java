@@ -13,6 +13,6 @@ public interface DailyDataIntegration {
 
   void deleteDailyDataById(String uniqueId);
 
-  void createDailyData(DailyData dailyData);
+  String createDailyData(DailyData dailyData);
 
 }

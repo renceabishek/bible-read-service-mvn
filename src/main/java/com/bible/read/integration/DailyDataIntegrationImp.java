@@ -1,6 +1,9 @@
 package com.bible.read.integration;
 
 import com.bible.read.model.DailyData;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +46,10 @@ public class DailyDataIntegrationImp implements DailyDataIntegration {
   }
 
   @Override
-  public void createDailyData(DailyData dailyData) {
+  public String createDailyData(DailyData dailyData) {
     DatabaseReference postsRef = mainDatabaseReference.child(path);
     DatabaseReference newPostRef = postsRef.push();
     newPostRef.setValueAsync(dailyData);
+    return newPostRef.getKey();
   }
 }

@@ -34,10 +34,10 @@ public class DailyDataServiceImp implements DailyDataService {
   public List<DailyData> getDailyDataByDate(String date) {
     return dailyDataIntegration.getDailyDataByDate(date).entrySet().stream()
         .map(k -> {
-          DailyData dailyData = objectMapper.convertValue(k.getValue(), DailyData.class);
-          return new DailyData(k.getKey(), dailyData.getDate(), dailyData.getName(),
-              dailyData.getPortion(), dailyData.getChapter(), dailyData.getFromVerses(),
-              dailyData.getToVerses());
+          DailyData dailyDatas = objectMapper.convertValue(k.getValue(), DailyData.class);
+          return new DailyData(k.getKey(), dailyDatas.getDate(), dailyDatas.getName(),
+              dailyDatas.getPortion(), dailyDatas.getChapter(), dailyDatas.getFromVerses(),
+              dailyDatas.getToVerses());
         }).collect(Collectors.toList());
   }
 
@@ -47,8 +47,8 @@ public class DailyDataServiceImp implements DailyDataService {
   }
 
   @Override
-  public void createDailyData(DailyData dailyData) {
-    dailyDataIntegration.createDailyData(dailyData);
+  public String createDailyData(DailyData dailyData) {
+    return dailyDataIntegration.createDailyData(dailyData);
   }
 
   @Override
