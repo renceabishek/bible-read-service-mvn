@@ -50,6 +50,8 @@ public class DailyDataServiceImp implements DailyDataService {
   public String createDailyData(DailyData dailyData) {
     return dailyDataIntegration.createDailyData(dailyData);
   }
+  
+
 
   @Override
   public List<TotalCount> getTotalCountData() {
@@ -74,4 +76,9 @@ public class DailyDataServiceImp implements DailyDataService {
         });
     return totalCounts;
   }
+
+@Override
+public void updateDailyData(DailyData dailyData, String uniqueId) {
+	dailyDataIntegration.updateDailyData(dailyData, uniqueId);	
+}
 }

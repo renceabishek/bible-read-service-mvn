@@ -44,6 +44,7 @@ public class DailyDataIntegrationImp implements DailyDataIntegration {
     restTemplate
         .delete("https://myfirstproject-fi.firebaseio.com/dailybible/" + uniqueId + ".json");
   }
+  
 
   @Override
   public String createDailyData(DailyData dailyData) {
@@ -52,4 +53,10 @@ public class DailyDataIntegrationImp implements DailyDataIntegration {
     newPostRef.setValueAsync(dailyData);
     return newPostRef.getKey();
   }
+
+@Override
+public void updateDailyData(DailyData dailyData, String uniqueId) {
+	 restTemplate.put("https://myfirstproject-fi.firebaseio.com/dailybible/" + uniqueId + ".json", dailyData);
+	
+}
 }

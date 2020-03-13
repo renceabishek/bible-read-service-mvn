@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,11 @@ public class ReadController {
 	  @PostMapping(value = "/all", consumes = "application/json")
 	  public String createDailyData(@RequestBody DailyData dailyData) {
 	    return dailyDataService.createDailyData(dailyData);
+	  }
+	  
+	  @PutMapping(value = "/all/{uniqueId}", consumes = "application/json")
+	  public void updateDailyData(@RequestBody DailyData dailyData, @PathVariable String uniqueId) {
+	     dailyDataService.updateDailyData(dailyData,uniqueId);
 	  }
 
 	  @GetMapping(value="/totalCounts")

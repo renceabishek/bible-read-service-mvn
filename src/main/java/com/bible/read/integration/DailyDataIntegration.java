@@ -14,5 +14,7 @@ public interface DailyDataIntegration {
   void deleteDailyDataById(String uniqueId);
 
   String createDailyData(DailyData dailyData);
+  
+  void updateDailyData(DailyData dailyData, String uniqueId);
 
 }
