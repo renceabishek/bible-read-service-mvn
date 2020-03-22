@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bible.read.model.Participants;
-import com.bible.read.service.DailyDataService;
-import com.bible.read.service.ParticipantsService;
+import com.bible.read.model.Profile;
+import com.bible.read.service.ProfileService;
+
 
 @RequestMapping("/admin")
 @RestController
@@ -22,20 +23,30 @@ import com.bible.read.service.ParticipantsService;
 public class AdminController {
 	
 	@Autowired
-	private ParticipantsService participantsService;
+	private ProfileService profileService;
+	
+	@GetMapping(value="/profile/all")
+	public String[] getProfiles() {
+		return profileService.getProfiles();
+	}
 
-	@GetMapping(value="/participants/all")
-	public List<Participants> getParticipants() {
-		return participantsService.getParticipants();
+	@GetMapping(value="/profile/{uniqueId}")
+	public Profile getProfile(@PathVariable String uniqueId) {
+		return profileService.getProfile(uniqueId);
 	}
 	
-	@PostMapping(value="/participants/post", consumes = "application/json")
-	public boolean postParticipants(@RequestBody Participants participants) {
-		return participantsService.postParticipants(participants);
+	@PostMapping(value="/profile", consumes = "application/json")
+	public String saveProfiles(@RequestBody Profile profile) {
+		return profileService.saveProfile(profile);
 	}
 	
-	@DeleteMapping(value="/participants/{uniqueId}/delete")
-	public boolean deleteParticipants(@PathVariable String uniqueId) {
-		return participantsService.deleteParticipants(uniqueId);
+	@PutMapping(value="/profile/{uniqueId}", consumes = "application/json")
+	public void updateProfile(@RequestBody Profile profile, @PathVariable String uniqueId) {
+		 profileService.updateProfile(profile,uniqueId);
+	}
+	
+	@DeleteMapping(value="/profile/{uniqueId}")
+	public void deleteProfiles(@PathVariable String uniqueId) {
+		 profileService.deleteProfile(uniqueId);
 	}
 }
