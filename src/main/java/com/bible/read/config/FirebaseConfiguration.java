@@ -23,12 +23,16 @@ public class FirebaseConfiguration {
 
 	  @Value("${firebase.database-url}")
 	  private String databaseUrl;
+	  
+	  @Value("${firebase.storage-url}")
+	  private String storageUrl;
 
 	  @Bean
 	  public FirebaseApp provideFirebaseOptions() throws IOException {
 	    FirebaseOptions options = new FirebaseOptions.Builder()
 	        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
 	        .setDatabaseUrl(databaseUrl)
+	        .setStorageBucket(storageUrl)
 	        .build();
 
 	    return FirebaseApp.initializeApp(options);

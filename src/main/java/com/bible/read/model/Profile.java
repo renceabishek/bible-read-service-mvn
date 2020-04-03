@@ -1,6 +1,11 @@
 package com.bible.read.model;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.Part;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.firebase.database.Exclude;
 
@@ -13,11 +18,11 @@ public class Profile {
 	private String sex;
 	private boolean isBibleReader;
 	private String role;
-	private String[] skills;
+	private List<String> skills;
 	private String about;
-	private String file;
-	private Date createdDate;
-	private Date updatedDate;
+	private String profileUrl;
+	private String createdDate;
+	private String updatedDate;
 	private int totalBibleWords;
 	private int bronze;
 	private int silver;
@@ -29,9 +34,9 @@ public class Profile {
 	}
 	
 	
-	public Profile(String name, String dob, String sex, boolean isBibleReader, String role, String[] skills,
-			String about, String file, Date createdDate, Date updatedDate, int totalBibleWords, int bronze, int silver,
-			int gold) {
+	public Profile(String name, String dob, String sex, boolean isBibleReader, String role, List<String> skills,
+			String about, String createdDate, String updatedDate, int totalBibleWords, int bronze, int silver,
+			int gold, String profileUrl) {
 		super();
 		this.name = name;
 		this.dob = dob;
@@ -40,17 +45,27 @@ public class Profile {
 		this.role = role;
 		this.skills = skills;
 		this.about = about;
-		this.file = file;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
 		this.totalBibleWords = totalBibleWords;
 		this.bronze = bronze;
 		this.silver = silver;
 		this.gold = gold;
+		this.profileUrl = profileUrl;
 	}
 	
 	
 
+
+
+	public String getProfileUrl() {
+		return profileUrl;
+	}
+
+
+	public void setProfileUrl(String profileUrl) {
+		this.profileUrl = profileUrl;
+	}
 
 
 	public String getUniqueId() {
@@ -87,7 +102,7 @@ public class Profile {
 		this.sex = sex;
 	}
 
-	public boolean isBibleReader() {
+	public boolean getIsBibleReader() {
 		return isBibleReader;
 	}
 
@@ -103,11 +118,11 @@ public class Profile {
 		this.role = role;
 	}
 
-	public String[] getSkills() {
+	public List<String> getSkills() {
 		return skills;
 	}
 
-	public void setSkills(String[] skills) {
+	public void setSkills(List<String> skills) {
 		this.skills = skills;
 	}
 
@@ -119,27 +134,20 @@ public class Profile {
 		this.about = about;
 	}
 
-	public String getFile() {
-		return file;
-	}
 
-	public void setFile(String file) {
-		this.file = file;
-	}
-
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getUpdatedDate() {
+	public String getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
+	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
