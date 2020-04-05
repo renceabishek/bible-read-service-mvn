@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bible.read.model.Activity;
 import com.bible.read.model.Profile;
 import com.bible.read.model.ProfilesGet;
 import com.bible.read.model.UpdateProfile;
+import com.bible.read.service.ActivityService;
 import com.bible.read.service.ProfileService;
 
 
@@ -31,6 +33,9 @@ public class AdminController {
 	
 	@Autowired
 	private ProfileService profileService;
+	
+	@Autowired
+	private ActivityService activityService;
 	
 	@GetMapping(value="/profile/all")
 	public List<ProfilesGet> getProfiles() {
@@ -59,10 +64,23 @@ public class AdminController {
 		 profileService.deleteProfile(uniqueId);
 	}
 	
-	@PostMapping(value="/sample/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public String saveSampleProfiles(@RequestParam(name ="file",required=false) MultipartFile file, 
-			@RequestPart(name ="profile",required=true) Profile profile) {
-		return profile.getName();
-		//return profileService.saveProfile(profile, file);
+	@GetMapping(value="/activity/all")
+	public List<Activity> getActivities() {
+		return activityService.getActivities();
+	}
+	
+	@PostMapping(value = "/activity", consumes = "application/json")
+	public String createActivity(@RequestBody Activity activity) {
+		return activityService.createActivity(activity);
+	}
+	
+	@PutMapping(value = "/activity/{uniqueId}", consumes = "application/json")
+	public void updateActivity(@RequestBody Activity activity, @PathVariable String uniqueId) {
+		 activityService.updateActivity(uniqueId,activity);
+	}
+	
+	@DeleteMapping(value = "/activity/{uniqueId}")
+	public void deleteActivity(@PathVariable String uniqueId) {
+		 activityService.deleteActivity(uniqueId);
 	}
 }
