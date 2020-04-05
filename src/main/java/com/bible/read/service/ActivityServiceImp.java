@@ -27,7 +27,8 @@ public class ActivityServiceImp implements ActivityService {
 			Activity activity = objectMapper.convertValue(k.getValue(), Activity.class);
 			activity.setUniqueId(k.getKey());
 			if (activity.getHelpedBy() == null) {
-				activity.setHelpedBy(new ArrayList());
+				List<String> emptyList=new ArrayList<String>();
+				activity.setHelpedBy(emptyList);
 			}
 			return activity;
 		}).collect(Collectors.toList());
