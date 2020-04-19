@@ -1,10 +1,16 @@
 package com.bible.read.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.google.common.collect.Lists;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +43,16 @@ public class FirebaseConfiguration {
 
 	    return FirebaseApp.initializeApp(options);
 	  }
+	  
+	  @Bean
+	  @Qualifier("storage-main")
+	  public Storage getStorage() throws IOException {			
+			
+		return StorageOptions.newBuilder()
+			.setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
+					  .build().getService();
+	  }
+	  
 
 	  @Bean
 	  @Qualifier("main")

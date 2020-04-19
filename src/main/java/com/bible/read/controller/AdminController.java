@@ -1,5 +1,6 @@
 package com.bible.read.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bible.read.model.Activity;
+import com.bible.read.model.Meeting;
 import com.bible.read.model.Profile;
 import com.bible.read.model.ProfilesGet;
 import com.bible.read.model.UpdateProfile;
 import com.bible.read.service.ActivityService;
+import com.bible.read.service.MeetingService;
 import com.bible.read.service.ProfileService;
 
 
@@ -36,6 +39,9 @@ public class AdminController {
 	
 	@Autowired
 	private ActivityService activityService;
+	
+	@Autowired
+	private MeetingService meetingService;
 	
 	@GetMapping(value="/profile/all")
 	public List<ProfilesGet> getProfiles() {
@@ -82,5 +88,31 @@ public class AdminController {
 	@DeleteMapping(value = "/activity/{uniqueId}")
 	public void deleteActivity(@PathVariable String uniqueId) {
 		 activityService.deleteActivity(uniqueId);
+	}
+	
+	@GetMapping(value="/meeting/all")
+	public List<Meeting> getMeetings() {
+		return meetingService.getMeetings();
+	}
+	
+	
+	@PostMapping(value="/meeting", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public HashMap<String,Object> createMeeting(@RequestParam(name ="files",required=false) List<MultipartFile> files, 
+			@RequestPart(name ="meeting",required=true) Meeting meeting) {
+		System.out.println("files are "+files);
+		return meetingService.createMeetings(meeting, files);
+	}
+	
+	@PatchMapping(value="/meeting/{uniqueId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public List<String> updateMeeting(@RequestParam(name ="files",required=false) List<MultipartFile> files, 
+			@RequestPart(name ="meeting",required=true) Meeting meeting, @PathVariable String uniqueId,
+			@RequestPart(name ="deletedPicsUrl",required=false) List<String> deletedPicsUrl) {
+		System.out.println("files are "+files);
+			return meetingService.updateMeeting(uniqueId, meeting, files, deletedPicsUrl);
+	}
+	
+	@DeleteMapping(value = "/meeting/{uniqueId}", consumes = "application/json")
+	public void deleteMeeting(@PathVariable String uniqueId, @RequestBody List<String> picUrl) {
+		meetingService.deleteMeeting(uniqueId, picUrl); 
 	}
 }

@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 @Service
 public class ActivityIntegrationImp implements ActivityIntegration {
 	
-	@Autowired
+	  @Autowired
 	  @Qualifier("main")
 	  private DatabaseReference mainDatabaseReference;
 
