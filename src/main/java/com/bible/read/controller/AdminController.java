@@ -70,25 +70,33 @@ public class AdminController {
 		 profileService.deleteProfile(uniqueId);
 	}
 	
+	// Activity Rest End Points
+	
 	@GetMapping(value="/activity/all")
 	public List<Activity> getActivities() {
 		return activityService.getActivities();
 	}
 	
-	@PostMapping(value = "/activity", consumes = "application/json")
-	public String createActivity(@RequestBody Activity activity) {
-		return activityService.createActivity(activity);
+	@PostMapping(value = "/activity", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public HashMap<String,Object> createActivity(@RequestParam(name ="files",required=false) List<MultipartFile> files, 
+			@RequestPart(name ="activity",required=true) Activity activity) {
+		return activityService.createActivity(activity, files);
 	}
 	
-	@PutMapping(value = "/activity/{uniqueId}", consumes = "application/json")
-	public void updateActivity(@RequestBody Activity activity, @PathVariable String uniqueId) {
-		 activityService.updateActivity(uniqueId,activity);
+	@PutMapping(value = "/activity/{uniqueId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public List<String> updateActivity(@RequestParam(name ="files",required=false) List<MultipartFile> files,
+			@RequestPart(name ="activity",required=true) Activity activity, @PathVariable String uniqueId,
+			@RequestPart(name ="deletedPicsUrl",required=false) List<String> deletedPicsUrl) {
+		
+		 return activityService.updateActivity(uniqueId,activity, files, deletedPicsUrl);
 	}
 	
-	@DeleteMapping(value = "/activity/{uniqueId}")
-	public void deleteActivity(@PathVariable String uniqueId) {
-		 activityService.deleteActivity(uniqueId);
+	@DeleteMapping(value = "/activity/{uniqueId}", consumes = "application/json")
+	public void deleteActivity(@PathVariable String uniqueId, @RequestBody List<String> picUrl) {
+		 activityService.deleteActivity(uniqueId, picUrl);
 	}
+	
+	// Meeting Rest End Points
 	
 	@GetMapping(value="/meeting/all")
 	public List<Meeting> getMeetings() {

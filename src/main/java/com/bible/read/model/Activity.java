@@ -11,13 +11,14 @@ public class Activity {
 	private List<String> organizedBy;
 	private List<String> participatedBy;
 	private List<String> helpedBy;
+	private List<String> picsUrl;
 	
 	
 	public Activity() {
 		
 	}
 	public Activity(String title, String content, String uniqueId, String date, List<String> organizedBy,
-			List<String> participatedBy, List<String> helpedBy) {
+			List<String> participatedBy, List<String> helpedBy, List<String> picsUrl) {
 		super();
 		this.title = title;
 		this.content = content;
@@ -26,7 +27,10 @@ public class Activity {
 		this.organizedBy = organizedBy;
 		this.participatedBy = participatedBy;
 		this.helpedBy = helpedBy;
+		this.picsUrl = picsUrl;
 	}
+	
+	
 	public String getTitle() {
 		return title;
 	}
@@ -69,6 +73,13 @@ public class Activity {
 	public void setHelpedBy(List<String> helpedBy) {
 		this.helpedBy = helpedBy;
 	}
+	public List<String> getPicsUrl() {
+		return picsUrl;
+	}
+	public void setPicsUrl(List<String> picsUrl) {
+		this.picsUrl = picsUrl;
+	}
+	
 	
 	
 }

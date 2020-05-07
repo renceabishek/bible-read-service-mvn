@@ -31,26 +31,30 @@ public class ProfileIntegrationImp implements ProfileIntegration {
 	  @Autowired
 	  @Qualifier("main")
 	  private DatabaseReference mainDatabaseReference;
+	  
+	  @Value("${firebase.database-url}")
+	  private String firebaseUrl;
 
 	  @Value("${firebase.path.profile}")
 	  private String path;
 	  
 	  @Value("${firebase.project-Url}")
 	  private String projectUrl;
+	  
+	  @Value("${firebase.storage.profilePic}")
+	  private String storageFolderName;
 
 	  private RestTemplate restTemplate = new RestTemplate();
 
 
 	@Override
 	public HashMap<String, Profile> getProfiles() {
-		return restTemplate.getForObject("https://myfirstproject-fi.firebaseio.com/profile.json",
-		        HashMap.class);
+		return restTemplate.getForObject(firebaseUrl+"/"+path+".json", HashMap.class);
 	}
 
 	@Override
 	public Profile getProfile(String uniqueId) {
-		return restTemplate.getForObject("https://myfirstproject-fi.firebaseio.com/profile/"+ uniqueId + ".json",
-		        Profile.class);
+		return restTemplate.getForObject(firebaseUrl+"/"+path+"/"+ uniqueId + ".json", Profile.class);
 	}
 	
 	@Override
@@ -58,7 +62,7 @@ public class ProfileIntegrationImp implements ProfileIntegration {
 		Bucket bucket = StorageClient.getInstance().bucket();
 		Blob blob=null;
 		try {
-			blob=bucket.create("profilepic/"+name, file.getInputStream(), Bucket.BlobWriteOption.userProject(projectUrl));
+			blob=bucket.create(storageFolderName+name, file.getInputStream(), Bucket.BlobWriteOption.userProject(projectUrl));
 			blob.getStorage().createAcl(blob.getBlobId(), Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -85,14 +89,14 @@ public class ProfileIntegrationImp implements ProfileIntegration {
 		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 		RestTemplate restTemplate = new RestTemplate(requestFactory);
 
-		restTemplate.exchange("https://myfirstproject-fi.firebaseio.com/profile/" + uniqueId + ".json", 
+		restTemplate.exchange(firebaseUrl+"/"+path+"/" + uniqueId + ".json", 
 				HttpMethod.PATCH, entity, Void.class);
 		
 	}
 
 	@Override
 	public void deleteProfile(String uniqueId) {
-		restTemplate.delete("https://myfirstproject-fi.firebaseio.com/profile/" + uniqueId + ".json");
+		restTemplate.delete(firebaseUrl+"/"+path+"/" + uniqueId + ".json");
 		
 	}
 
